@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useRef, useState } from "react";
-import { addContext } from "./logic";
+import { addContext, mashtaber } from "./logic";
 import UnderState from "./logic/underState";
 
 function App() {
@@ -25,6 +25,10 @@ function App() {
         id="canvas"
         width={1000}
         height={800}
+        onWheel={(e) => {
+          const { deltaY } = e;
+          mashtaber(deltaY);
+        }}
       ></canvas>
     </div>
   );

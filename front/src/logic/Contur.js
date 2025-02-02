@@ -1,6 +1,5 @@
 class Contur {
-  constructor(crox) {
-    this.crox = crox;
+  constructor() {
     this.points = [];
   }
 }

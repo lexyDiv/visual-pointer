@@ -2,29 +2,26 @@ import { ctx, height, width } from ".";
 import Crox from "./Crox";
 
 class UnderState {
-    constructor() {
-       this.conturs = [];
-    }
+  constructor() {
+    this.croxes = [];
+    this.points = [];
+  }
 
-    draw() {
-        
-        this.conturs.forEach((contur) => {
-           // console.log(contur.crox)
-            ctx.save();
-          ctx.translate(contur.crox.x, contur.crox.y);
-            contur.points.forEach((point, i, arr) => {
-              // ctx.fillStyle = "white";
-              // ctx.fillRect(point.x, point.y, 5, 5);
-              // console.log(point)
-              point.draw();
-            });
-            ctx.restore();
+  draw() {
+    this.croxes.forEach((crox) => {
+      crox.draw();
+     // ctx.save();
+     // ctx.translate(crox.x, crox.y);
+      crox.conturs.forEach((contur) => {
+        contur.points.forEach((point, i, arr) => {
+          point.draw();
         });
-    }
+      });
+     // ctx.restore();
+    });
+  }
 }
 
-
 //underState.
-
 
 export default UnderState;

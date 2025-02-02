@@ -1,15 +1,16 @@
-import { ctx } from ".";
+import { ctx, delta, mashtab } from ".";
 
 class Point {
   constructor(x, y) {
     this.x = x;
-    this.y = -y;
+    this.y = y;
   }
 
   draw() {
     ctx.beginPath();
     ctx.fillStyle = "blue";
-    ctx.arc(this.x, this.y, 5, 0, 2 * Math.PI, false);
+    ctx.arc((this.x + delta.x) * mashtab,
+     (this.y + delta.y) * mashtab, 5, 0, 2 * Math.PI, false);
     ctx.fill();
   }
 }
