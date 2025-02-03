@@ -46,6 +46,7 @@ export function mashtaber(deltaY) {
 
   const dX1 = (centerPoint.x + delta.x) * mashtab - mouseData.x;
   const dY1 = (centerPoint.y + delta.y) * mashtab - mouseData.y;
+  const mousDis = Math.sqrt(dX1 * dX1 + dY1 * dY1);
  // console.log(dX / mashtab)
 
 if (!scrollPoint.time) {
@@ -53,10 +54,11 @@ if (!scrollPoint.time) {
   scrollPoint.sy = centerPoint.y - (dY1 / mashtab);
 }
 
-scrollPoint.time = 20;
+// scrollPoint.time = mousDis <= 130 ? 20 : 0;
+scrollPoint.time = 15;
 /////////////////
 
-  deltaY > 0 ? mashtab -= 0.3 : mashtab += 0.3;
+  deltaY > 0 ? mashtab -= 0.15 : mashtab += 0.15;
 
 
 //if (!scrollPoint.time) {
@@ -116,11 +118,11 @@ setInterval(() => {
       underState = new UnderState();
       const crox = new Crox(width / 2, height / 2);
       const contur = new Contur();
-      contur.points.push(new Point(crox.x - 100, crox.y + 100));
-    //  console.log(contur.points[0]);
-      contur.points.push(new Point(crox.x + 100, crox.y + 100));
-      contur.points.push(new Point(crox.x + 100, crox.y - 100));
       contur.points.push(new Point(crox.x - 100, crox.y - 100));
+      contur.points.push(new Point(crox.x + 100, crox.y - 100));
+      contur.points.push(new Point(crox.x + 100, crox.y + 100));
+      contur.points.push(new Point(crox.x - 100, crox.y + 100));
+      contur.getPointDis();
       crox.conturs.push(contur);
       underState.croxes.push(crox);
     }
@@ -130,26 +132,16 @@ setInterval(() => {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, width, height);
 
-    ctx.fillStyle = "red";
+    // ctx.fillStyle = "red";
 
-    ctx.fillRect((centerPoint.x + delta.x) * mashtab, (centerPoint.y + delta.y) * mashtab, 10, 10);
-    //ctx.fillRect(centerPoint.x, centerPoint.y, 10, 10);
-///////
-    ctx.fillStyle = "violet";
-    ctx.fillRect((scrollPoint.x + delta.x) * mashtab, (scrollPoint.y + delta.y) * mashtab, 10, 10);
-    // ctx.fillStyle = "green";
-    // ctx.fillRect((mouseData.x + delta.x) * mashtab, (mouseData.y + delta.y) * mashtab, 10, 10);
-  ///////// 
+    // ctx.fillRect((centerPoint.x + delta.x) * mashtab, (centerPoint.y + delta.y) * mashtab, 10, 10);
+
+    // ctx.fillStyle = "violet";
+    // ctx.fillRect((scrollPoint.x + delta.x) * mashtab, (scrollPoint.y + delta.y) * mashtab, 10, 10);
+
 
     underState && underState.draw();
 
-
-   // console.log(x)
-
-
-   // mashtab += 0.001;
-  // delta.x += 1;
-  // console.log(delta.x)
   scrollPoint.time && scrollPoint.time --;
   }
 }, 30);
